@@ -315,27 +315,52 @@ def main():
       
 
     #EXTRA CREDIT
-    # print("EXTRA CREDIT")
-    # print()
+    print("EXTRA CREDIT")
+    print("***********")
+    print()
+    print("Luck draw from cashier 1")
+    print("------------------------")
+    print()
 
-    # customers = []
-    # for i in range(100):
-    #     customers.append(Customer(str(i)))
+    customers = []
+    for i in range(100):
+        
+        customers.append(str(i))
+        
+
+    for x in customers[1:]:
+        temp = Customer("x")
+        if int(x) % 10 == 0:
+            rand = randint(1,100)
+            print("{}th order at cashier 1:".format(x))
+            if rand <= 5:
+                temp.reload_money(10)
+                print("****Customer {} won a 10$ gift card!!".format(x))
+            else:
+                print("---Did not win 10$")
 
 
+        temp.validate_order(cashier1, no_thai, 'Sushi', 0)
+
+    print()
+    print("Luck draw from cashier 2")
+    print("------------------------")
+    print()
 
 
-    # for x in customers:
-    #     if x % 10 == 0:
-    #         rand = randint(1,100)
-    #         print("10th order at cashier 1:")
-    #         if rand <= 5:
-    #             x.reload_money(10)
-    #             print("---Won a 10$ gift card!!")
-    #         print("---Did not win 10$")
+    for x in customers[1:]:
+        temp = Customer("x")
+        if int(x) % 10 == 0:
+            rand = randint(1,100)
+            print("{}th order at cashier 2:".format(x))
+            if rand <= 5:
+                temp.reload_money(10)
+                print("****Customer {} won a 10$ gift card!!".format(x))
+            else:
+                print("---Did not win 10$")
 
 
-    #     x.validate_order(cashier1, no_thai, 'Sushi', 0)
+        temp.validate_order(cashier2, no_thai, 'Sushi', 0)
 
 
 
