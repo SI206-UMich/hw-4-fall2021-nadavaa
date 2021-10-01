@@ -1,4 +1,5 @@
 
+from random import randint
 import unittest
 
 # The Customer class
@@ -212,13 +213,18 @@ class TestAllMethods(unittest.TestCase):
         # Please follow the instructions below to create three different kinds of test cases 
         # Test case 1: the stall does not have this food item: 
         self.assertFalse(d3.has_item("Pizza", 20))
-        
+        self.assertFalse(d3.has_item("taco", 20)) # has_item is case sensative
+        self.assertFalse(d3.has_item("Tacos", 20)) # name needs to be spelled EXACTLY like in the inventory
+
         # Test case 2: the stall does not have enough food item: 
         self.assertFalse(d3.has_item("Burger", 41))
-
+        self.assertFalse(d3.has_item("Taco", 51))
+        
         # Test case 3: the stall has the food item of the certain quantity: 
         self.assertTrue(d3.has_item("Burger", 10))
+        self.assertTrue(d3.has_item("Burger", 40))
         self.assertTrue(d3.has_item("Taco", 50))
+        self.assertTrue(d3.has_item("Taco", 0))
         
 
 	# Test validate order
@@ -226,12 +232,19 @@ class TestAllMethods(unittest.TestCase):
 
 		# case 1: test if a customer doesn't have enough money in their wallet to order
         self.assertEqual(self.f1.validate_order(self.c1, self.s1, "Burger", 11), 2)
+        self.assertEqual(self.f1.validate_order(self.c2, self.s1, "Burger", 16), 2)
+        self.assertEqual(self.f1.validate_order(self.c2, self.s2, "Burger", 16), 2)
+        print()
 
 		# case 2: test if the stall doesn't have enough food left in stock
+        self.assertEqual(self.f1.validate_order(self.c1, self.s1, "Burger", 41), 1)
+        self.assertEqual(self.f1.validate_order(self.c1, self.s1, "Taco", 51), 1)
         self.assertEqual(self.f1.validate_order(self.c1, self.s1, "Burger", 51), 1)
+        print()
 
 		# case 3: check if the cashier can order item from that stall
         self.assertEqual(self.f1.validate_order(self.c1, "No Stall existing", "Burger", 3), 0)
+
       
 
     # Test if a customer can add money to their wallet
@@ -243,6 +256,7 @@ class TestAllMethods(unittest.TestCase):
     
 ### Write main function
 def main():
+    import random
     #Create different objects 
     
 
@@ -262,7 +276,7 @@ def main():
 
 
     #Try all cases in the validate_order function
-    #Below you need to have *each customer instance* try the four cases
+    #Below you need to have *each customr instance* try the four cases
     #case 1: the cashier does not have the stall 
     print("---Printing cases where the cashier doesn't have the stall:")
     nadav.validate_order(cashier1, 'Pizza House', 'Pizza', 2)
@@ -284,19 +298,58 @@ def main():
     nadav.validate_order(cashier1, fresh_forage, 'Tomato', 20)
     jonny.validate_order(cashier1, fresh_forage, 'Tomato', 9)
     jonny.validate_order(cashier2, fresh_forage, 'Beet', 27)
-    paz.validate_order(cashier1, no_thai, 'Coffee', 2)
+    paz.validate_order(cashier1, no_thai, 'Pad Thai', 21)
     print()
     
-    #case 4: the customer successfully places an order
-    print("---Printing cases where the order was successful")  
+    #case 4: the customer successfully places an order 
     nadav.validate_order(cashier1, fresh_forage, 'Tomato', 5)
+    print(nadav)
     jonny.validate_order(cashier1, fresh_forage, 'Carrot', 9)
     jonny.validate_order(cashier2, fresh_forage, 'Beet', 4)
+    print(jonny)
     paz.validate_order(cashier1, no_thai, 'Sushi', 2)
     paz.validate_order(cashier1, no_thai, 'Pad Thai', 1)
-    print("SUCCESS")  
+    print(paz)
+    print ()
 
-    pass
+      
+
+    #EXTRA CREDIT
+    # print("EXTRA CREDIT")
+    # print()
+
+    # customers = []
+    # for i in range(100):
+    #     customers.append(Customer(str(i)))
+
+
+
+
+    # for x in customers:
+    #     if x % 10 == 0:
+    #         rand = randint(1,100)
+    #         print("10th order at cashier 1:")
+    #         if rand <= 5:
+    #             x.reload_money(10)
+    #             print("---Won a 10$ gift card!!")
+    #         print("---Did not win 10$")
+
+
+    #     x.validate_order(cashier1, no_thai, 'Sushi', 0)
+
+
+
+        
+
+        
+        
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
 	main()
